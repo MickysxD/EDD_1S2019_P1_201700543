@@ -13,7 +13,7 @@ class Pila():
 
     def pop(self):
         if (self.cima == None):
-
+            self.cima = None
         else:
             temp = self.cima
             nuevo = self.cima.abajo

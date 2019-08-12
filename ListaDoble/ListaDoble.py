@@ -30,3 +30,20 @@ class ListaDoble():
             temp.anterior.siguiente = self.ultimo.siguiente
             temp.siguiente.anterior = self.ultimo.anterior
             self.contador -= 1
+
+    def insertar_i (self, cuerpo):
+        nuevo = cuerpo
+        if(self.contador == 0):
+            nuevo.anterior = nuevo
+            nuevo.siguiente = nuevo
+            self.primero = nuevo
+            self.ultimo = nuevo
+            self.contador += 1
+        else:
+            temp = self.primero
+            temp.anterior = nuevo
+            nuevo.siguiente = temp
+            self.ultimo.siguiente = nuevo
+            nuevo.anterior = self.ultimo
+            self.primero = nuevo
+            self.contador += 1
