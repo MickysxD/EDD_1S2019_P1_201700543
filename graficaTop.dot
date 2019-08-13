@@ -1,0 +1,6 @@
+digraph  Grafico {
+node [shape = record];
+rankdir=LR
+"(Angel,1)"->"(Yantuche,0)";
+"(Yantuche,0)"->"Null";
+}

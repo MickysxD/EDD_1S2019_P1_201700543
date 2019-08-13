@@ -8,8 +8,6 @@ class ListaDoble():
     def insertar_f (self, cuerpo):
         nuevo = cuerpo
         if(self.contador == 0):
-            nuevo.anterior = nuevo
-            nuevo.siguiente = nuevo
             self.primero = nuevo
             self.ultimo = nuevo
             self.contador += 1
@@ -17,25 +15,18 @@ class ListaDoble():
             temp = self.ultimo
             temp.siguiente = nuevo
             nuevo.anterior = temp
-            self.primero.anterior = nuevo
-            nuevo.siguiente = self.primero
             self.ultimo = nuevo
             self.contador += 1
     
     def eliminar_f (self):
-        if (self.contador == 0):
-            contador = 0
-        else:
-            temp = self.ultimo
-            temp.anterior.siguiente = self.ultimo.siguiente
-            temp.siguiente.anterior = self.ultimo.anterior
-            self.contador -= 1
+        temp = self.ultimo
+        temp.anterior.siguiente = None
+        self.ultimo = temp.anterior
+        self.contador -= 1
 
     def insertar_i (self, cuerpo):
         nuevo = cuerpo
         if(self.contador == 0):
-            nuevo.anterior = nuevo
-            nuevo.siguiente = nuevo
             self.primero = nuevo
             self.ultimo = nuevo
             self.contador += 1
@@ -43,7 +34,5 @@ class ListaDoble():
             temp = self.primero
             temp.anterior = nuevo
             nuevo.siguiente = temp
-            self.ultimo.siguiente = nuevo
-            nuevo.anterior = self.ultimo
             self.primero = nuevo
             self.contador += 1

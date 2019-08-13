@@ -9,7 +9,6 @@ class Fila():
     def enqueue (self, puntos):
         nuevo = puntos
         if (self.primero == None):
-            nuevo.siguiente = nuevo
             self.primero = nuevo
             self.ultimo = nuevo
             self.contador += 1

@@ -1,0 +1,12 @@
+digraph  Grafico {
+node [shape = record];
+rankdir=LR
+"Yantuche"->"Solis";
+"Yantuche"->"Miguel";
+"Solis"->"Angel";
+"Solis"->"Yantuche";
+"Angel"->"Miguel";
+"Angel"->"Solis";
+"Miguel"->"Yantuche";
+"Miguel"->"Angel";
+}

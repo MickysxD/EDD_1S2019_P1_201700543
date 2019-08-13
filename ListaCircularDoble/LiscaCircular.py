@@ -2,6 +2,7 @@ class ListaCircular():
 
     def __init__ (self):
         self.primero = None
+        self.contador = 0
         
     def agregar (self, nodo):
         nuevo = nodo
@@ -9,6 +10,7 @@ class ListaCircular():
             self.primero = nuevo
             self.primero.siguiente = self.primero
             self.primero.anterior = self.primero
+            self.contador += 1
         else:
             temp = self.primero.anterior
             temp.siguiente = nuevo
@@ -16,3 +18,4 @@ class ListaCircular():
             self.primero.anterior = nuevo
             nuevo.siguiente = self.primero
             self.primero = nuevo
+            self.contador += 1

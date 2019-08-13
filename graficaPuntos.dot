@@ -1,0 +1,5 @@
+digraph  Grafico {
+node [shape = record];
+rankdir=LR
+struct3 [label= "  | (40,12)"];
+}
