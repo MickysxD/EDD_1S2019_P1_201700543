@@ -1,6 +1,7 @@
 digraph  Grafico {
 node [shape = record];
 rankdir=LR
-"(Angel,1)"->"(Yantuche,0)";
-"(Yantuche,0)"->"Null";
+0[label="(Miguel,18)"];
+1[label="Null"];
+0->1;
 }

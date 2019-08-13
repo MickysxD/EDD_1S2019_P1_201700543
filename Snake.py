@@ -47,7 +47,7 @@ def juego(win):
             punteot += punteo
             punteo = 0
             nivel += 1
-            pausa -= 5
+            pausa -= 10
             comida = Pila()
             snake = ListaDoble()
             snake.insertar_f(Cuerpo(5,14))
@@ -306,6 +306,7 @@ def tablap(win):
         pt = pt.siguiente
     curses.endwin()
 
+
 def graficaSnake(snake):
     nombre = "graficaSnake"
     doc = open(nombre + ".dot", "w")
@@ -315,22 +316,29 @@ def graficaSnake(snake):
     temp = snake.ultimo
     for i in range(snake.contador):
         if(temp == snake.primero):
-            doc.write("\"(" + str(temp.x) + "," + str(temp.y) + ")\"->\"Null \";\n")
-            doc.write("\"(" + str(temp.x) + "," + str(temp.y) + ")\"->\"(" + str(temp.siguiente.x) + "," + str(temp.siguiente.y) + ")\";\n")
+            doc.write(str(i)+"[label=\"" + str(temp.x) + "," + str(temp.y) + "\"];\n")
+            doc.write(str(i+1) + "[label=\"Null\"];\n")
+            doc.write(str(i) + "->" + str(i+1) + ";\n")
+            doc.write(str(i) + "->" + str(i-1) + ";\n")
             break
         if(temp == snake.ultimo):
-            doc.write("\"(" + str(temp.x) + "," + str(temp.y) + ")\"->\"Null\";\n")
-            doc.write("\"(" + str(temp.x) + "," + str(temp.y) + ")\"->\"(" + str(temp.anterior.x) + "," + str(temp.anterior.y) + ")\";\n")
+            doc.write(str(i)+"[label=\"" + str(temp.x) + "," + str(temp.y) + "\"];\n")
+            doc.write(str(i-1) + "[label=\"Null\"];\n")
+            doc.write(str(i) + "->" + str(i+1) + ";\n")
+            doc.write(str(i) + "->" + str(i-1) + ";\n")
             temp = temp.anterior
         elif (temp != None):
-            doc.write("\"(" + str(temp.x) + "," + str(temp.y) + ")\"->\"(" + str(temp.siguiente.x) + "," + str(temp.siguiente.y) + ")\";\n")
-            doc.write("\"(" + str(temp.x) + "," + str(temp.y) + ")\"->\"(" + str(temp.anterior.x) + "," + str(temp.anterior.y) + ")\";\n")
+            doc.write(str(i)+"[label=\"" + str(temp.x) + "," + str(temp.y) + "\"];\n")
+            doc.write(str(i) + "->" + str(i+1) + ";\n")
+            doc.write(str(i) + "->" + str(i-1) + ";\n")
             temp = temp.anterior
         
     doc.write("}")
     doc.close()
     os.system("dot -Tjpg " + nombre + ".dot" + " -o " + nombre + ".jpg")
     os.system(nombre + ".jpg")
+
+    
 
 def graficaPuntos(puntos):
     nombre = "graficaPuntos"
@@ -360,9 +368,12 @@ def graficarTop():
     temp = puntajes.primero
     for i in range(puntajes.contador):
         if temp.siguiente == None:
-            doc.write("\"(" + str(temp.nombre) + "," + str(temp.puntos) + ")\"->\"Null\";\n")
+            doc.write(str(i)+"[label=\"(" + str(temp.nombre) + "," + str(temp.puntos) + ")\"];\n")
+            doc.write(str(i+1) + "[label=\"Null\"];\n")
+            doc.write(str(i) + "->" + str(i+1) + ";\n")
         else:
-            doc.write("\"(" + str(temp.nombre) + "," + str(temp.puntos) + ")\"->\"(" + str(temp.siguiente.nombre) + "," + str(temp.siguiente.puntos) + ")\";\n")
+            doc.write(str(i)+"[label=\"(" + str(temp.nombre) + "," + str(temp.puntos) + ")\"];\n")
+            doc.write(str(i) + "->" + str(i+1) + ";\n")
             temp = temp.siguiente
     
     doc.write("}")
@@ -379,8 +390,18 @@ def graficarUsuarios():
     
     temp = usuarios.primero
     for i in range(usuarios.contador):
-        doc.write("\"" + str(temp.nombre) + "\"->\"" + str(temp.siguiente.nombre) + "\";\n")
-        doc.write("\"" + str(temp.nombre) + "\"->\"" + str(temp.anterior.nombre) + "\";\n")
+        if temp == usuarios.primero:
+            doc.write(str(i)+"[label=\"" + str(temp.nombre) + "\"];\n")
+            doc.write(str(i) + "->" + str(i+1) + ";\n")
+            doc.write(str(i) + "->" + str(usuarios.contador-1) + ";\n")
+        elif temp == usuarios.primero.anterior:
+            doc.write(str(i)+"[label=\"" + str(temp.nombre) + "\"];\n")
+            doc.write(str(i) + "->" + str(i-1) + ";\n")
+            doc.write(str(i) + "->" + str(0) + ";\n")
+        else:
+            doc.write(str(i)+"[label=\"" + str(temp.nombre) + "\"];\n")
+            doc.write(str(i) + "->" + str(i+1) + ";\n")
+            doc.write(str(i) + "->" + str(i-1) + ";\n")
         temp = temp.siguiente
     
     doc.write("}")
